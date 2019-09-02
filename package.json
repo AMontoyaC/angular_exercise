@@ -1,0 +1,21 @@
+{
+  "name": "angular-exercise",
+  "version": "0.0.1",
+  "description": "Angular Exercise.",
+  "main": "server.js",
+  "author": "",
+  "dependencies": {
+    "@ng-bootstrap/ng-bootstrap": "^5.1.0",
+    "angular-bootstrap": "^0.12.2",
+    "angular-ui-bootstrap": "^2.5.6",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.3.1",
+    "express": "^4.10.8",
+    "method-override": "^2.3.10",
+    "mongoose": "4.10.8",
+    "morgan": "^1.9.0"
+  },
+  "scripts": {
+    "start": "mongod --dbpath=/data --port 27017 --fork --logpath /var/log/mongod.log"
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html ng-app="userMain">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Angular Exercise</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#todo-list 				{ margin-bottom:30px; }
+		#todo-form 	 			{ margin-bottom:50px; }
+	</style>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
+
+	<script src="js/controllers/main.js"></script>
+	<script src="js/services/users.js"></script>
+	<script src="js/core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1>Users</h1>
+		</div>
+
+		<div id="user-list" class="row">
+			<div ng-show="showError" class="col-sm-6 col-sm-offset-5" ng-include="'./404.html'"></div>
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="val_checkbox" ng-true-value="true" ng-false-value="false" ng-checked="val_checkbox == 'true'" ng-change="getUsers()">
+								<span>Show/hide users</span>
+							</label>
+						</div>
+						<button class="btn" ng-click="showUsers()">Show users</button>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<div class="input-group" style="margin-bottom: 20px;">
+							<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+							<input class="form-control" id="search_name" type="text" placeholder="Search by name" ng-model="searchName">
+						</div> 
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4">
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li ng-click="setOptionDropdown('name')"><a href="#">By Name</a></li>
+								<li ng-click="setOptionDropdown('username')"><a href="#">By Username</a></li>
+								<li ng-click="setOptionDropdown('status')"><a href="#">By Status</a></li>
+							</ul>
+						</div>
+						<div class="input-group" style="margin-bottom: 20px; margin-top: 10px;">
+							<div class="input-group-addon" ng-click="filterByOption()" style="cursor: pointer"><i class="glyphicon glyphicon-ok"></i></div>
+							<input class="form-control" ng-model="filter_input" type="text" placeholder="Filter">
+						</div> 
+					</div>
+				</div>
+
+				<div class="well" style="margin-top: 10px;">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Username</th>
+								<th>Status</th>
+							</tr>
+							<tr ng-repeat="user in users | filter:searchName">
+								<td>{{ user._id }}</td>
+								<td>{{ user.name }}</td>
+								<td>{{ user.username }}</td>
+								<td>{{ user.status }}</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+
+				<div class="form" style="margin-top: 10%;">
+					<h4>Add user</h4>
+					<input class="form-control" ng-model="add_name" type="text" placeholder="Name" style="margin-top: 5px;">
+					<input class="form-control" ng-model="add_username" type="text" placeholder="Username" style="margin-top: 5px; margin-bottom: 5px;">
+					<input type="checkbox" ng-model="add_status" ng-true-value="active" ng-false-value="inactive" ng-checked="add_status == 'active'">Activo/Inactivo</br>
+					<button class="btn" ng-click="addUser()" style="margin-top: 5px;">Add user</button>	
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
