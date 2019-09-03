@@ -6,28 +6,14 @@ var database = require('./config/database');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var userSchema = require('./app/models/user');
 
 mongoose.connect(database.localUrl); 
 var db = mongoose.connection;
 db.once('open', function() {
     console.log("Connection Successful!");
     
-    var UserSchema = mongoose.Schema({
-        name: {
-            type: String,
-            required: true
-        },
-        username: {
-            type: String,
-            required: true
-        },
-        status: {
-            type: String,
-            required: true
-        }
-    });
-    
-    var User = mongoose.model('User', UserSchema);
+    var User = userSchema;
     var user1 = new User({ name: 'John Smith', username: 'john_smith', status: 'active' });
     var user2 = new User({ name: 'Nick Doe', username: 'nick_doe', status: 'inactive' });
     var user3 = new User({ name: 'Samantha Johnson', username: 'samantha_johnson', status: 'inactive' });
